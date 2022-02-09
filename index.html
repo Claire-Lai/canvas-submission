@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+  
+  </head>
+
+  <body class="container">
+    
+    <div id="canvas-container">
+      <canvas
+        id="canvas-real"
+        class="canvas"
+        width="1280px"
+        height="720px"
+      ></canvas>
+      <canvas
+        id="canvas-draft"
+        class="canvas"
+        width="1280px"
+        height="720px"
+      ></canvas>
+    </div> 
+    <div  id="selectorContainer">
+      <div class="selectorDiv">
+        Line Width
+        <select name="lineWidth" id="lineWidth">
+          <option value="5" >Fine</option>
+          <option value="10" >Regular</option>
+          <option value="15" >Thick</option>
+        </select>
+      </div> 
+      <div class="selectorDiv">
+        Eraser Size
+        <select name="eraserSize" id="eraserSize">
+          <option value="5" >Small</option>
+          <option value="20" >Medium</option>
+          <option value="70" >Large</option>
+        </select>
+      </div> 
+      <div class="selectorDiv" id='fontFamily'>
+        Font Style
+        <select name="font" id="font">
+          <option value="helvetica" id="helvetica">Helvetica</option>
+          <option value="times" id="times">Times</option>
+          <option value="impact" id="impact">Impact</option>
+          <option value="courier" id="courier">Courier</option>
+          <option value="verdana" id="verdana">Verdana</option>
+          <option value="sans-serif" id="sans-serif">sans-serif</option>
+        </select>
+      </div>
+      <div class="selectorDiv">
+        Font Size
+        <select name="fontSize" id="fontSize">
+          <option value="15" id="small">small</option>
+          <option value="40" id="medium">medium</option>
+          <option value="60" id="large">large</option>
+          <option value="100" id="extra-large">extra-large</option>
+        </select>
+      </div> 
+    </div>
+   
+
+    <!-- Toolbar -->
+    <nav class="tool-bar">
+      <h1>Canvas</h1>
+       <div class="toolbar-container">
+         <div class="toolbar-item" id="drawing-line"><img src="./Images/paint.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="drawing-straightLine"><img src="./Images/line.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="drawing-quadraticCurve"><img src="./Images/quadraticCurve.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="drawing-bezierCurve"><img src="./Images/curve.png" alt="" height="25px"></div>
+       </div>
+       <div class="toolbar-container">
+         <div class="toolbar-item" id="drawing-circle"><img src="./Images/circle.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="drawing-triangle"><img src="./Images/triangle.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="drawing-rectangle"><img src="./Images/rectangle.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="insert-text"><img src="./Images/text.png" alt="" height="25px"></div>
+       </div>
+       <div class="toolbar-container">
+         <div class="toolbar-item" id="color-fill"><img src="./Images/fill.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="eraser"><img src="./Images/erase.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="undo"><img src="./Images/undo.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="redo"><img src="./Images/redo.png" alt="" height="25px"></div>
+       </div>
+       <div class="toolbar-container">
+         <div class="toolbar-item" id="clear"><img src="./Images/clear.png" alt="" height="25px"></div>
+         <div class="toolbar-item" id="save"><img src="./Images/save.png" alt="" height="25px"></div>
+         <div id="strokeColorIndicator" class="strokeColorIndicator"><img src="./Images/palette.png" alt="" height="25px"></div>
+         <div id="fillColorIndicator" class="fillColorIndicator"><img src="./Images/paint-bucket.png" alt="" height="25px"></div>
+       </div>
+       <div id="strokeColorPicker"></div>
+       <div id="fillColorPicker"></div>
+   
+    <!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <!-- color selector CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <!-- The stroke color selector functionality -->
+    <script
+      src="./javascript/strokeColorSelector.js"
+      type="text/javascript"
+    ></script>
+    <!-- The fill color selector functionality -->
+    <script
+      src="./javascript/fillColorSelector.js"
+      type="text/javascript"
+    ></script>
+    <!-- The font family functionality -->
+    <script src="./javascript/font.js" type="text/javascript"></script>
+     <!-- The font size functionality -->
+     <script src="./javascript/fontSize.js" type="text/javascript"></script>
+    <!-- The drawing functionality  -->
+    <script
+      src="./javascript/canvas-common.js"
+      type="text/javascript"
+    ></script>
+    <!-- Toolsbar functionality -->
+    <!-- The drawing line functionality  -->
+    <script
+      src="./javascript/drawing-line.js"
+      type="text/javascript"
+    ></script>
+    <!-- The drawing rectangle functionality  -->
+    <script
+      src="./javascript/drawing-rectangle.js"
+      type="text/javascript"
+    ></script>
+    <!-- The drawing straight line functionality -->
+    <script
+    src="./javascript/drawing-straightLine.js"
+    type="text/javascript"
+    ></script>
+    <!-- The drawing circle functionality -->
+    <script
+    src="./javascript/drawing-circle.js"
+    type="text/javascript"
+    ></script>
+    <!-- The drawing quadratic curve functionality -->
+    <script
+    src="./javascript/drawing-quadraticCurve.js"
+    type="text/javascript"
+    ></script>
+    <!-- The drawing bezier curve functionality -->
+    <script
+    src="./javascript/drawing-bezierCurve.js"
+    type="text/javascript"
+    ></script>
+    <!-- The undo functionality -->
+    <script src="./javascript/undo.js" type="text/javascript"></script>
+    <!-- The redo functionality -->
+    <script src="./javascript/redo.js" type="text/javascript"></script>
+    <!-- The eraser functionality -->
+    <script src="./javascript/eraser.js" type="text/javascript"></script>
+    <!-- The save image functionality -->
+    <script src="./javascript/save-image.js" type="text/javascript"></script>
+     <!-- The clear canvas functionality -->
+     <script src="./javascript/clear-canvas.js" type="text/javascript"></script>
+    <!-- The insert text functionality -->
+    <script src="./javascript/insert-text.js" type="text/javascript"></script>
+    <!-- The drawing  triangle functionality -->
+    <script src="./javascript/drawing-triangle.js" type="text/javascript"></script>
+    <!-- The fill bucket functionality -->
+    <script src="./javascript/fill-bucket.js" type="text/javascript"></script>
+    <script type="text/javascript">
+  
+    $(()=>{
+      currentFunction =  new DrawingLine(contextReal)
+      $("#drawing-rectangle").click(() => {
+        currentFunction = new DrawingRectangle(contextReal, contextDraft);
+      });
+      $("#drawing-line").click(() => {
+        currentFunction = new DrawingLine(contextReal);
+      });  
+      $("#drawing-triangle").click(() => {
+        currentFunction = new DrawingTriangle1(contextDraft,contextReal);
+      });  
+      $("#drawing-straightLine").click(() => {
+        currentFunction = new DrawingStraightLine (contextDraft,contextReal);
+      });  
+      $("#drawing-circle").click(() => {
+        currentFunction = new DrawingCircle (contextDraft,contextReal);
+      });  
+      $("#drawing-quadraticCurve").click(() => {
+        currentFunction = new DrawingQuadraticCurve (contextDraft,contextReal);
+      });  
+      $("#drawing-bezierCurve").click(() => {
+        currentFunction = new DrawingBezierCurve (contextDraft,contextReal);
+      });  
+      $("#eraser").click(() => {
+      currentFunction = new Eraser(contextReal);
+      });  
+      $("#insert-text").click(() => {
+      currentFunction = new InsertText(contextDraft,contextReal);
+      });   
+      $("#color-fill").click(() => {
+      currentFunction = new FillBucket(contextReal);
+      });   
+    })
+    </script>
+  </body>
+</html>
